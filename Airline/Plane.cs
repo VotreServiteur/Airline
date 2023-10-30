@@ -6,6 +6,9 @@ public abstract class Plane
     
     public int Capacity { get; set; }
     public int LoadCapacity { get; set; }
+    public static int TotalCapacity { get; set; } = 0;
+    public static int TotalLoadCapacity { get; set; } = 0;
+
     public int Crew { get; set; }
     
     public int FuelRate { get; set; }
@@ -19,26 +22,40 @@ public abstract class Plane
         Crew = crew;
         FuelRate = fuelRate;
         FlightRange = flightRange;
+        
+        TotalCapacity += Capacity;
+        TotalLoadCapacity += LoadCapacity;
     }
 
     protected Plane()
     {
-        var readInt = Convert.ToInt32(Console.ReadLine());
         InputMessage("plane name");
         Name = Console.ReadLine() ?? "Plane";
         InputMessage("capacity");
-        Capacity = readInt;
+        Capacity = Convert.ToInt32(Console.ReadLine());
+        ;
         InputMessage("load capacity");
-        LoadCapacity = readInt;
+        LoadCapacity = Convert.ToInt32(Console.ReadLine());
+        ;
         InputMessage("number of crew");
-        Crew = readInt;
+        Crew = Convert.ToInt32(Console.ReadLine());
+        ;
         InputMessage("fuel rate");
-        FuelRate = readInt;
+        FuelRate = Convert.ToInt32(Console.ReadLine());
+        ;
         InputMessage("flight range");
-        FlightRange = readInt;
+        FlightRange = Convert.ToInt32(Console.ReadLine());
+        ;
 
+        TotalCapacity += Capacity;
+        TotalLoadCapacity += LoadCapacity;
     }
 
     public void InputMessage(string msg) =>
-        Console.WriteLine($"Input {msg}\n\t: ");    
+        Console.Write($"Input {msg}\n\t> ");
+
+    public override string ToString()
+    {
+        return $" Plane: {Name}\n\tCapacity: {Capacity}\n\tLoadCapacity: {LoadCapacity}\n\tNumber of crew: {Crew}\n\tFuel rate:{FuelRate}\n\tFlight range:{FlightRange}\n\t";
     }
+}
