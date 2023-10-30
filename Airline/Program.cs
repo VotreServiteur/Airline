@@ -69,6 +69,7 @@ internal class Program
         Write($"Input minimal rate: {minRate = ToInt32(ReadLine())}" +
               $"Input maximal rate: {maxRate = ToInt32(ReadLine())}");
 
+        
         foreach (var plane in airline)
         {
             if (plane.FuelRate >= minRate && plane.FuelRate <= maxRate) Write(plane.ToString());
