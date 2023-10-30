@@ -10,10 +10,15 @@ public class PassengerPlane:Plane
         AmountOfPassengers = amountOfPassengers;
     }
 
-    protected PassengerPlane()
+    public PassengerPlane()
         : base()
     {
         InputMessage("amount of passengers");
         AmountOfPassengers = Convert.ToInt32(Console.ReadLine());
+        
+    }
+    public override string ToString()
+    {
+        return base.ToString() + $"Amount if passengers: {AmountOfPassengers}\n";
     }
 }
