@@ -12,12 +12,21 @@ namespace Airline;
 internal class Program
 {
     private static XmlDocument xDoc = new XmlDocument();
-
+    
     private static List<Plane> airline = new();
 
     
     public static void Main(string[] args)
     {
+        xDoc.Load(@"G:\Code\C#\Product Builde\Airline\airline.xml");
+        XmlElement? xRoot = xDoc.DocumentElement;
+        if (xRoot != null)
+        {
+            foreach (XmlElement xNode in xRoot)
+            {
+                
+            }
+        }
           Write("Count of planes: ");
           int count = ToInt32(ReadLine());
           for (int i = 0; i < count; i++)
