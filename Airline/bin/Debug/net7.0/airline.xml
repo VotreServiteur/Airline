@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<planes>
+<PassengerPlane xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Plna 1</Name>
+  <Capacity>5</Capacity>
+  <LoadCapacity>45</LoadCapacity>
+  <Crew>21</Crew>
+  <FuelRate>54</FuelRate>
+  <FlightRange>355</FlightRange>
+  <AmountOfPassengers>135</AmountOfPassengers>
+</PassengerPlane><?xml version="1.0" encoding="utf-8"?>
+<CargoPlane xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Pnae </Name>
+  <Capacity>215</Capacity>
+  <LoadCapacity>513</LoadCapacity>
+  <Crew>513</Crew>
+  <FuelRate>5313</FuelRate>
+  <FlightRange>513</FlightRange>
+  <LoadPrice>32</LoadPrice>
+</CargoPlane>
+</planes>

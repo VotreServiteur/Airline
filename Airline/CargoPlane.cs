@@ -1,7 +1,12 @@
 ﻿namespace Airline;
-
+[Serializable]
 public class CargoPlane : Plane
 {
+    protected override void CreateXmlNode()
+    {
+        throw new NotImplementedException();
+    }
+
     public int LoadPrice { get; set; }
 
     public CargoPlane(string name, int capacity, int loadCapacity, int crew, int fuelRate, int flightRange, int loadPrice) 

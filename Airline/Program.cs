@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System.Xml;
+using System.Xml.Serialization;
 using static System.Console;
 using static System.Convert;
 namespace Airline;
@@ -18,6 +19,7 @@ internal class Program
     
     public static void Main(string[] args)
     {
+        /*
         xDoc.Load(@"G:\Code\C#\Product Builde\Airline\airline.xml");
         XmlElement? xRoot = xDoc.DocumentElement;
         if (xRoot != null)
@@ -27,6 +29,7 @@ internal class Program
                 
             }
         }
+         */
           Write("Count of planes: ");
           int count = ToInt32(ReadLine());
           for (int i = 0; i < count; i++)
@@ -66,10 +69,33 @@ internal class Program
                       break;
                   case 0:
                       WriteLine("Saving data");
+                      var formatPas = new XmlSerializer(typeof(PassengerPlane)); 
+                      
+                      var formatCar = new XmlSerializer(typeof(CargoPlane));
+                      XmlDocument xDoc = new();
+                      xDoc.Load("airline.xml");
+                      xDoc.CreateNode("plane","",null);
+                      using (FileStream fs = new("airline.xml",FileMode.OpenOrCreate))
+                      {
+                          XmlNode? xNode = xDoc.ChildNodes[0];
+                          foreach (var plane in airline)
+                          {
+                              if (plane.GetType() == typeof(PassengerPlane))
+                              {
+                                  formatPas.Serialize(fs,plane);
+                              }
+                              else
+                              {
+                                  formatCar.Serialize(fs,plane);
+                              }
+                          }
+                      }
                       throw new("Exit");
                       
               }
           }
+
+
     }
 
     private static void FindPlane()

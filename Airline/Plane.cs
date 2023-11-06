@@ -2,8 +2,11 @@
 
 namespace Airline;
 using static System.Convert;
+
+[Serializable]
 public abstract class Plane
 {
+    public XmlElement CurNode { get; set; }
     public string Name { get; set; }
     
     public int Capacity { get; set; }
@@ -18,17 +21,18 @@ public abstract class Plane
 
 
     protected Plane(XmlElement xNode):
-        this(xNode.Attributes.GetNamedItem("name")?.Value,
-            ToInt32(xNode.ChildNodes[0]?.InnerText),
+        this(xNode.ChildNodes[0]?.InnerText,
             ToInt32(xNode.ChildNodes[1]?.InnerText),
             ToInt32(xNode.ChildNodes[2]?.InnerText),
             ToInt32(xNode.ChildNodes[3]?.InnerText),
-            ToInt32(xNode.ChildNodes[4]?.InnerText)
+            ToInt32(xNode.ChildNodes[4]?.InnerText),
+            ToInt32(xNode.ChildNodes[5]?.InnerText)
             )
     { }
 
     protected Plane(string name, int capacity, int loadCapacity, int crew, int fuelRate, int flightRange)
     {
+        
         Name = name;
         Capacity = capacity;
         LoadCapacity = loadCapacity;
@@ -63,14 +67,9 @@ public abstract class Plane
         TotalCapacity += Capacity;
         TotalLoadCapacity += LoadCapacity;
 
-        CreateXmlNode();
     }
 
-    protected void CreateXmlNode()
-    {
-        throw new NotImplementedException();
-    }
-
+    protected abstract void CreateXmlNode();
     public void InputMessage(string msg) =>
         Console.Write($"Input {msg}\n\t> ");
 
