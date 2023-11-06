@@ -2,7 +2,6 @@
 using System.Xml.Linq;
 
 namespace Airline;
-[Serializable]
 public class PassengerPlane:Plane
 {
     public int AmountOfPassengers { get; set; } = 0;

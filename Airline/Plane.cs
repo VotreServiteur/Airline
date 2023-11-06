@@ -4,7 +4,6 @@ using System.Xml.Linq;
 namespace Airline;
 using static System.Convert;
 
-[Serializable]
 public abstract class Plane
 {
     public XmlElement CurNode { get; set; }
