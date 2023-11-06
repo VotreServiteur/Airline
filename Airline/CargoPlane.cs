@@ -1,11 +1,11 @@
-﻿namespace Airline;
+﻿using System.Xml;
+using System.Xml.Linq;
+
+namespace Airline;
 [Serializable]
 public class CargoPlane : Plane
 {
-    protected override void CreateXmlNode()
-    {
-        throw new NotImplementedException();
-    }
+   
 
     public int LoadPrice { get; set; }
 
@@ -14,7 +14,10 @@ public class CargoPlane : Plane
     {
         LoadPrice = loadPrice;
     }
-
+    public CargoPlane(XmlElement xNode) : base(xNode)
+    {
+        LoadPrice = Convert.ToInt32(xNode.LastChild?.InnerText);
+    }
     public CargoPlane()
         : base()
     {
@@ -22,7 +25,13 @@ public class CargoPlane : Plane
         LoadPrice = Convert.ToInt32(Console.ReadLine());
 
     }
-
+    public override XElement CreateXmlNode()
+    {
+        XElement plane = base.CreateXmlNode();
+        plane.Add(new XAttribute("type", "C"));
+        plane.Add(new XElement("LoadPrice",LoadPrice));
+        return plane;
+    }
     public override string ToString()
     {
         return base.ToString() + $"Load price: {LoadPrice}\n";

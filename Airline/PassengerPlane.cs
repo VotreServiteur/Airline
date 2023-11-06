@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using System.Xml.Linq;
 
 namespace Airline;
 [Serializable]
@@ -25,9 +26,12 @@ public class PassengerPlane:Plane
         
     }
 
-    protected override void CreateXmlNode()
+    public override XElement CreateXmlNode()
     {
-        
+        XElement plane = base.CreateXmlNode();
+        plane.Add(new XAttribute("type", "P"));
+        plane.Add(new XElement("amountOfPassengers",AmountOfPassengers));
+        return plane;
     }
 
     public override string ToString()

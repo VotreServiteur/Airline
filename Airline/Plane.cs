@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using System.Xml.Linq;
 
 namespace Airline;
 using static System.Convert;
@@ -20,14 +21,14 @@ public abstract class Plane
     public int FlightRange { get; set; }
 
 
-    protected Plane(XmlElement xNode):
+    protected Plane(XmlElement xNode) :
         this(xNode.ChildNodes[0]?.InnerText,
             ToInt32(xNode.ChildNodes[1]?.InnerText),
             ToInt32(xNode.ChildNodes[2]?.InnerText),
             ToInt32(xNode.ChildNodes[3]?.InnerText),
             ToInt32(xNode.ChildNodes[4]?.InnerText),
             ToInt32(xNode.ChildNodes[5]?.InnerText)
-            )
+        )
     { }
 
     protected Plane(string name, int capacity, int loadCapacity, int crew, int fuelRate, int flightRange)
@@ -69,7 +70,18 @@ public abstract class Plane
 
     }
 
-    protected abstract void CreateXmlNode();
+    public virtual XElement CreateXmlNode()
+    {
+        XElement plane = new("plane");
+        plane.Add(new XElement("name",Name));
+        plane.Add(new XElement("capacity",Capacity));
+        plane.Add(new XElement("loadCapacity", LoadCapacity));
+        plane.Add(new XElement("crew",Crew));
+        plane.Add(new XElement("fuelRate", FuelRate));
+        plane.Add(new XElement("flightRange", FlightRange));
+
+        return plane;
+    }
     public void InputMessage(string msg) =>
         Console.Write($"Input {msg}\n\t> ");
 
